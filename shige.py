@@ -20,19 +20,20 @@ if __name__ == '__main__':
 		html = req.text
 		bf = BeautifulSoup(html, 'lxml')
 		targets_url = bf.find_all(class_='member-list')
-		
 		for each in targets_url:
-			print(each.a.get("href"))
+			print("##########")
+			print(each.find_all("a"))
+			print('#########')
+			print(each.get("href"))
 			print(each.img.get("src"))
-			print(each.span.get())
-			list_url.append(each.div.get('alt') + '=' + each.get('href'))
+			list_url.append(each.img.get("src") + '=' + each.a.get('href'))
 
 	print('连接采集完成')
 
 	for each_img in list_url:
 		img_info = each_img.split('=')
 		target_url = img_info[1]
-		filename = img_info[0] + '.jpg'
+		filename = img_info[0] 
 		print('下载：' + filename)
 		headers = {
 			"User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
